@@ -12,51 +12,51 @@
     <EditText
         android:id="@+id/UserName"
         android:hint="@string/user_name"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/FirstName"
         android:hint="@string/first_name"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/LastName"
         android:hint="@string/last_name"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/ageDisplay"
-        android:hint= "@string/age"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
-        android:layout_width="fill_parent"
+
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearance"/>
+        android:inputType="datetime"
+        android:ems="10"
+        android:hint="@string/age"
+        android:id="@+id/Age" />
 
-    <SeekBar
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Age"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/ageDisplay" />
-
-
-
-    <Button
-        android:id="@+id/Photo"
-        android:text="@string/photo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="uploadImage"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ImageView" />
+        <ImageButton
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="uploadImage"
+            android:text="@string/photo"
+            android:id="@+id/Photo" />
+
+
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ImageView" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/Save"
