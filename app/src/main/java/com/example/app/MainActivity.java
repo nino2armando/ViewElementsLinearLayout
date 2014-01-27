@@ -16,6 +16,12 @@ import android.widget.ImageView;
 public class MainActivity extends ActionBarActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+
+    // Define a DialogFragment that displays the error dialog
+/*    public static class ErrorDialogFragmet extends DialogFragment{
+
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
