@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.app.services.ImageHandler;
+
 public class MainActivity extends ActionBarActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -55,6 +57,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+
+            Bitmap imageBitmap = ImageHandler.extractImage(data);
+            ImageView mImageView = (ImageView) findViewById(R.id.ImageView);
+            mImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
     public void uploadImage(View view){
         Intent takePicktureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(takePicktureIntent.resolveActivity(getPackageManager()) != null){
@@ -62,14 +74,9 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Bundle extra = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extra.get("data");
-            ImageView mImageView = (ImageView) findViewById(R.id.ImageView);
-            mImageView.setImageBitmap(imageBitmap);
-        }
+    public void saveUserInput(View view)
+    {
+        String a = "sdf";
     }
 
     /**
