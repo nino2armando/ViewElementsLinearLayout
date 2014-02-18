@@ -1,5 +1,4 @@
-package com.example.app.services;
-
+package com.example.app.Contracts;
 import android.provider.BaseColumns;
 
 /**
@@ -19,6 +18,6 @@ public final class UserDataContract {
         public static final String COLUMN_NAME_LASTNAME = "lastname";
         public static final String COLUMN_NAME_AGE = "age";
         public static final String COLUMN_IMAGE = "image";
+        public static final String COLUMN_NAME_NULLABLE = "null";
     }
-
 }

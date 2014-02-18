@@ -1,6 +1,8 @@
 package com.example.app;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,8 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.app.Contracts.UserDataContract;
+import com.example.app.Repository.UserDataRepository;
 import com.example.app.services.ImageHandler;
 
 public class MainActivity extends ActionBarActivity {
@@ -76,7 +81,28 @@ public class MainActivity extends ActionBarActivity {
 
     public void saveUserInput(View view)
     {
-        String a = "sdf";
+        UserDataRepository dbHelper = new UserDataRepository(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // extract data
+        EditText userName = (EditText) findViewById(R.id.UserName);
+        EditText firstName = (EditText) findViewById(R.id.FirstName);
+        EditText lastName = (EditText) findViewById(R.id.LastName);
+        EditText age = (EditText) findViewById(R.id.Age);
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(UserDataContract.UserDataEntry.COLUMN_NAME_ENTRY_ID, 1);
+        values.put(UserDataContract.UserDataEntry.COLUMN_NAME_USERNAME, userName.getText().toString());
+        values.put(UserDataContract.UserDataEntry.COLUMN_NAME_FIRSTNAME, firstName.getText().toString());
+        values.put(UserDataContract.UserDataEntry.COLUMN_NAME_LASTNAME, lastName.getText().toString());
+        values.put(UserDataContract.UserDataEntry.COLUMN_NAME_AGE, age.getText().toString());
+
+        // Insert the new row, returning the primary key value of the new row
+
+        long newRowId;
+        newRowId = db.insert(UserDataContract.UserDataEntry.TABLE_NAME,
+                   UserDataContract.UserDataEntry.COLUMN_NAME_NULLABLE,
+                   values);
     }
 
     /**
