@@ -2,8 +2,10 @@ package com.example.app;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -24,7 +26,9 @@ public class MainActivity extends ActionBarActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
+    Uri selectedImageUri;
     // Define a DialogFragment that displays the error dialog
 /*    public static class ErrorDialogFragmet extends DialogFragment{
 
@@ -62,10 +66,24 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public String getRealPahtFromUri(Uri contentUri){
+            String result = null;
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+            if(cursor.moveToFirst()){
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                result = cursor.getString(column_index);
+            }
+        cursor.close();
+        return result;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
 
+            selectedImageUri = getIntent().getData();
+            String imagePath = getRealPahtFromUri(selectedImageUri);
             Bitmap imageBitmap = ImageHandler.extractImage(data);
             ImageView mImageView = (ImageView) findViewById(R.id.ImageView);
             mImageView.setImageBitmap(imageBitmap);
